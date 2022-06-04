@@ -15,7 +15,7 @@
   }
   ```
 4. Run the following commands in your terminal: `npm install`, `npm run server-dev`, `npm run react-dev`
-5. open `http://localhost:3000/` in the browser.
+5. open `http://localhost:3100/` in the browser.
 
 
 # Overview

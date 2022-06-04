@@ -12,7 +12,7 @@ const qaRouter = require('./qa');
 const jsonParser = bodyParser.json();
 
 const app = express();
-const PORT = 3000;
+const PORT = 3100;
 const apiHost = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 // compress all requests
