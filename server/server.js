@@ -15,6 +15,8 @@ const app = express();
 const PORT = 3000;
 const apiHost = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
+const overviewAPI = 'http://localhost:5000';
+
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, "/../client/dist")));
@@ -33,9 +35,9 @@ app.get('/overview/:product_id', (req, res) => {
     headers: {Authorization: token}
   };
 
-  axios.get(`${apiHost}/products/${product_id}/styles/`, options)
+  axios.get(`${overviewAPI}/products/${product_id}/styles/`)
   .then(async ({data: {results: styleData}}) => {
-    const {data: generalData} = await axios.get(`${apiHost}/products/${product_id}`, options);
+    const {data: generalData} = await axios.get(`${overviewAPI}/products/${product_id}`);
     const data = { styleData, ...generalData};
     res.send(data)
   })
