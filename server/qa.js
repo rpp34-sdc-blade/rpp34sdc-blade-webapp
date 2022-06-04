@@ -6,12 +6,15 @@ const bodyParser = require("body-parser");
 const apiHost = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const jsonParser = bodyParser.json();
 
+// For questions and answers API
+const sdcHost = 'http://localhost:3000';
+
 const qaRouter = express.Router({mergeParams: true});
 
 qaRouter.route('/questions')
     .get((req, res) => {
         var {product_id} = req.query;
-        var url = `${apiHost}/qa/questions?product_id=${product_id}&count=500`;
+        var url = `${sdcHost}/qa/questions?product_id=${product_id}&count=500`;
         axios.get(url, {
         headers: {
             Authorization: token
@@ -23,7 +26,7 @@ qaRouter.route('/questions')
     .post(jsonParser, (req, res) => {
         var body = req.body;
 
-        var url = `${apiHost}/qa/questions`;
+        var url = `${sdcHost}/qa/questions`;
         axios.post(url, body, {
             'content-type': 'application/json',
             headers: {
@@ -43,7 +46,7 @@ qaRouter.route('/questions/:question_id/answers')
         var {question_id} = req.params;
         var body = req.body;
 
-        var url = `${apiHost}/qa/questions/${question_id}/answers`;
+        var url = `${sdcHost}/qa/questions/${question_id}/answers`;
         axios.post(url, body, {
             'content-type': 'application/json',
             headers: {
@@ -63,7 +66,7 @@ qaRouter.route('/questions/:question_id/helpful')
         var {question_id} = req.params;
         var body = req.body;
 
-        var url = `${apiHost}/qa/questions/${question_id}/helpful`;
+        var url = `${sdcHost}/qa/questions/${question_id}/helpful`;
         axios.put(url, body, {
             'content-type': 'application/json',
             headers: {
@@ -83,7 +86,7 @@ qaRouter.route('/answers/:answer_id/helpful')
         var {answer_id} = req.params;
         var body = req.body;
 
-        var url = `${apiHost}/qa/answers/${answer_id}/helpful`;
+        var url = `${sdcHost}/qa/answers/${answer_id}/helpful`;
         axios.put(url, body, {
             'content-type': 'application/json',
             headers: {
@@ -103,7 +106,7 @@ qaRouter.route('/answers/:answer_id/helpful')
             var {answer_id} = req.params;
             var body = req.body;
 
-            var url = `${apiHost}/qa/answers/${answer_id}/report`;
+            var url = `${sdcHost}/qa/answers/${answer_id}/report`;
             axios.put(url, body, {
                 'content-type': 'application/json',
                 headers: {
