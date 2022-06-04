@@ -73,7 +73,7 @@ class Answer extends React.Component {
         this.saveHelpful = this.saveHelpful.bind(this);
         this.handleImageClick = this.handleImageClick.bind(this);
     }
-    
+
     saveHelpful() {
         fetch(`/qa/answers/${this.props.id}/helpful`, {
             method: 'POST',
@@ -115,7 +115,7 @@ class Answer extends React.Component {
             })
         })
     }
-    
+
     render() {
         var formatedDate = new Date(this.props.date).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -127,18 +127,18 @@ class Answer extends React.Component {
             <div key={this.props.body} >
                 <span style={{ fontWeight: 600 }}>A:</span> {this.props.body}
             </div>
-            {this.props.photos.length > 0 
+            {this.props.photos.length > 0
                 && this.props.photos.map(
-                    photo => <Image 
-                            key={photo}
-                            style={{backgroundImage: `url(${photo})`}}
-                            onclick={() => {this.handleImageClick(photo)}}>
+                    photo => <Image
+                            key={photo.id}
+                            style={{backgroundImage: `url(${photo.url})`}}
+                            onclick={() => {this.handleImageClick(photo.url)}}>
                     </Image>)
             }
             <p>
                 <small>
-                    by {this.props.answerer_name}, {formatedDate} | Helpful? 
-                    {this.state.helpfulVoted ? 
+                    by {this.props.answerer_name}, {formatedDate} | Helpful?
+                    {this.state.helpfulVoted ?
                         <>
                             <Count>({this.props.helpfulness + 1})</Count>
                             <CheckCircle />
@@ -147,18 +147,18 @@ class Answer extends React.Component {
                         <>
                             <VoteLink onClick={() => this.saveHelpful()}>Yes</VoteLink>
                             <Count>({this.props.helpfulness})</Count>
-                        </> 
+                        </>
                     }
                 <span>| </span>
-                {this.state.reported ? 
+                {this.state.reported ?
                         <>
                             <Message>Reported</Message>
                         </> :
                         <>
                             <VoteLink onClick={() => this.report()}>Report</VoteLink>
-                        </> 
+                        </>
                 }
-                </small>       
+                </small>
              </p>
         </>
         )
